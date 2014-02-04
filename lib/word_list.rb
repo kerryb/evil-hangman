@@ -6,6 +6,8 @@ class WordList
   end
 
   def guess letter
+    new_words = @words.reject {|w| w.include? letter }
+    @words = new_words unless new_words.empty?
   end
 
   private
