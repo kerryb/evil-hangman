@@ -14,7 +14,14 @@ class WordList
     patterns = all_matching_patterns_for letter
     matches = Hash[patterns.map {|p| [p, @words.grep(/^#{p}$/)] }]
     pattern, @words = matches.group_by {|_, words| words.size }.sort_by {|size, _| size }.last[1].first
-    @pattern = pattern.gsub "[^#{letter}]", "."
+    pattern_mask = pattern.gsub "[^#{letter}]", "."
+    pattern_mask.chars.each_with_index do |l, i|
+      @pattern[i] = l unless l == "."
+    end
+  end
+
+  def solved?
+    @pattern !~ /\./
   end
 
   private

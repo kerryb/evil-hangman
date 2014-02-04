@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+require_relative "lib/word_list"
+
+word_list = WordList.new File.read("/usr/share/dict/words").lines.map {|w| w.chomp.upcase }
+
+tries = 0
+
+until word_list.solved? do
+  tries += 1
+  puts word_list
+  word_list.guess gets.upcase.chomp
+end
+
+puts "Congratulations! The word was #{word_list}"
+puts "You took #{tries} tries to guess it."
