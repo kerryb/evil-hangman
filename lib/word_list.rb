@@ -3,11 +3,18 @@ class WordList
 
   def initialize words
     @words = longest_words_in words
+    @pattern = "." * @words.first.length
+  end
+
+  def to_s
+    @pattern
   end
 
   def guess letter
     new_words = @words.reject {|w| w.include? letter }
-    @words = new_words unless new_words.empty?
+    if new_words.any?
+      @words = new_words
+    end
   end
 
   private

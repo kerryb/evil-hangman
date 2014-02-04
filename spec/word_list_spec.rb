@@ -8,6 +8,10 @@ describe WordList do
     expect(word_list.words).to match_array %w[foo bar baz]
   end
 
+  it "represents itself as the appropriate number of dots" do
+    expect(word_list.to_s).to eq "..."
+  end
+
   context "after guessing a letter that's not in any words" do
     before { word_list.guess "x" }
 
@@ -30,6 +34,10 @@ describe WordList do
 
     it "doesn't change the word list" do
       expect(word_list.words).to match_array %w[bar baz]
+    end
+
+    xit "shows the guessed letter in the pattern" do
+      expect(word_list.to_s).to eq ".a."
     end
   end
 end
